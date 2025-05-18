@@ -1,0 +1,32 @@
+[
+  {
+    "id": 101,
+    "title": "Mathematics",
+    "teacher_id": 1
+  },
+  {
+    "id": 102,
+    "title": "Computer Science",
+    "teacher_id": 1
+  },
+  {
+    "id": 103,
+    "title": "Test",
+    "teacher_id": 1
+  },
+  {
+    "id": 107,
+    "title": "Test 4",
+    "teacher_id": 1
+  },
+  {
+    "id": 104,
+    "title": "Tst",
+    "teacher_id": 2
+  },
+  {
+    "id": 104,
+    "title": "Urdu",
+    "teacher_id": 1
+  }
+]
