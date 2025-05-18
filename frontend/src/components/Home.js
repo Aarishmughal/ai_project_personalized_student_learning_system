@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "../App.css";
 const Home = () => (
     <Card className="text-center">
         <Card.Body className="px-5 pt-3">
@@ -10,7 +11,7 @@ const Home = () => (
             <hr />
             <div className="d-flex justify-content-center align-items-center gap-4">
                 <Nav.Link as={Link} to="/students">
-                    <Card className="bg-success text-white p-4 shadow-lg">
+                    <Card className="bg-success text-white p-4 home-card-custom">
                         <i
                             class="bi bi-people-fill m-0"
                             style={{ fontSize: "96px" }}
@@ -21,7 +22,7 @@ const Home = () => (
                     </Card>
                 </Nav.Link>
                 <Nav.Link as={Link} to="/courses">
-                    <Card className="bg-primary text-white p-4 shadow-lg">
+                    <Card className="bg-primary text-white p-4 home-card-custom">
                         <i
                             class="bi bi-book m-0"
                             style={{ fontSize: "96px" }}
@@ -30,7 +31,7 @@ const Home = () => (
                     </Card>
                 </Nav.Link>
                 <Nav.Link as={Link} to="/teachers">
-                    <Card className="bg-danger text-white p-4 shadow-lg">
+                    <Card className="bg-danger text-white p-4 home-card-custom">
                         <i
                             class="bi bi-people m-0"
                             style={{ fontSize: "96px" }}
