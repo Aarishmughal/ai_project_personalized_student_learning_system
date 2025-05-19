@@ -13,11 +13,13 @@ app.use(bodyParser.json());
 const studentsRouter = require("./routes/students");
 const coursesRouter = require("./routes/courses");
 const teachersRouter = require("./routes/teachers");
+const libraryRouter = require("./routes/library");
 
 // app.use("/auth", authenticationRouter);
 app.use("/api/students", studentsRouter);
 app.use("/api/courses", coursesRouter);
 app.use("/api/teachers", teachersRouter);
+app.use("/api/library", libraryRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

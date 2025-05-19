@@ -7,6 +7,8 @@ import StudentList from "./components/StudentList";
 import CourseList from "./components/CourseList";
 import TeacherList from "./components/TeacherList";
 import "./App.css";
+import Library from "./components/Library";
+import AiCorner from "./components/AiCorner";
 
 const App = () => {
     const API_URL = "http://localhost:5000/api";
@@ -14,14 +16,16 @@ const App = () => {
         <Router>
             <Navbar bg="primary" variant="primary">
                 <Container>
-                    <Navbar.Brand href="/">
-                        <img
-                            src="/logo.png"
-                            height="100"
-                            className="d-inline-block align-top rounded-4"
-                            alt="Student Management System"
-                        />
-                    </Navbar.Brand>
+                    <Nav.Link as={Link} to="/">
+                        <Navbar.Brand>
+                            <img
+                                src="/logo.png"
+                                height="100"
+                                className="d-inline-block align-top rounded-4"
+                                alt="Student Management System"
+                            />
+                        </Navbar.Brand>
+                    </Nav.Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
@@ -49,6 +53,22 @@ const App = () => {
                                 <i class="bi bi-people me-2"></i>
                                 Teachers
                             </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                to="/library"
+                                className="nav-link-custom mx-2"
+                            >
+                                <i class="bi bi-book me-2"></i>
+                                Library
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                to="/ai-corner"
+                                className="nav-link-custom mx-2"
+                            >
+                                <i class="bi bi-stars me-2"></i>
+                                AI Corner
+                            </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -68,6 +88,14 @@ const App = () => {
                     <Route
                         path="/teachers"
                         element={<TeacherList API_URL={API_URL} />}
+                    />
+                    <Route
+                        path="/library"
+                        element={<Library API_URL={API_URL} />}
+                    />
+                    <Route
+                        path="/ai-corner"
+                        element={<AiCorner API_URL={API_URL} />}
                     />
                 </Routes>
             </Container>

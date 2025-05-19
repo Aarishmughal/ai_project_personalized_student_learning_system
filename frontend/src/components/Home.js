@@ -41,6 +41,30 @@ const Home = () => (
                         </h4>
                     </Card>
                 </Nav.Link>
+                <Nav.Link as={Link} to="/library">
+                    <Card className="bg-warning p-4 home-card-custom">
+                        <i
+                            class="bi bi-book m-0"
+                            style={{ fontSize: "96px" }}
+                        ></i>
+                        <h4 className="display-5 fst-italic">
+                            Library Management
+                        </h4>
+                    </Card>
+                </Nav.Link>
+            </div>
+            <div className="mt-3 w-100">
+                <Nav.Link as={Link} to="/library">
+                    <Card className="bg-info p-4 home-card-custom">
+                        <div className="d-flex justify-content-center align-items-center gap-4">
+                            <i
+                                class="bi bi-stars m-0"
+                                style={{ fontSize: "148px" }}
+                            ></i>
+                            <h4 className="display-1 fst-italic">AI Corner</h4>
+                        </div>
+                    </Card>
+                </Nav.Link>
             </div>
             <Card.Footer className="mt-4 ">
                 <h5 className="text-muted fw-normal">

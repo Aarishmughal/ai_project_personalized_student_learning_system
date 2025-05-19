@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "asd",
+    "author": "asd",
+    "course_id": "101"
+  },
+  {
+    "id": 2,
+    "title": "Test2",
+    "author": "asd",
+    "course_id": 102
+  },
+  {
+    "id": 3,
+    "title": "asd",
+    "author": "asd",
+    "course_id": 101
+  },
+  {
+    "id": 4,
+    "title": "Test3",
+    "author": "asd",
+    "course_id": 101
+  },
+  {
+    "id": 5,
+    "title": "",
+    "author": "",
+    "course_id": 101
+  }
+]
