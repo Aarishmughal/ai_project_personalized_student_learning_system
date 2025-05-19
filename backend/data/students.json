@@ -10,11 +10,5 @@
     "name": "Bob",
     "email": "bob@example.com",
     "password": "123456"
-  },
-  {
-    "id": 3,
-    "name": "Gandu",
-    "email": "gandu@gmail.com",
-    "password": "123456"
   }
 ]

@@ -16,7 +16,7 @@ const Home = () => (
                             class="bi bi-people-fill m-0"
                             style={{ fontSize: "96px" }}
                         ></i>
-                        <h4 className="display-4 fst-italic">
+                        <h4 className="display-5 fst-italic">
                             Manage Students
                         </h4>
                     </Card>
@@ -27,7 +27,7 @@ const Home = () => (
                             class="bi bi-book m-0"
                             style={{ fontSize: "96px" }}
                         ></i>
-                        <h4 className="display-4 fst-italic">Manage Courses</h4>
+                        <h4 className="display-5 fst-italic">Manage Courses</h4>
                     </Card>
                 </Nav.Link>
                 <Nav.Link as={Link} to="/teachers">
@@ -36,7 +36,7 @@ const Home = () => (
                             class="bi bi-people m-0"
                             style={{ fontSize: "96px" }}
                         ></i>
-                        <h4 className="display-4 fst-italic">
+                        <h4 className="display-5 fst-italic">
                             Manage Teachers
                         </h4>
                     </Card>
@@ -54,7 +54,7 @@ const Home = () => (
                         <strong>ReactJs, ExpressJs & ♥</strong>
                     </a>
                 </h5>
-                <p className="text-muted fst-italic mb-0 small">Ver 0.5.1</p>
+                <p className="text-muted fst-italic mb-0 small">Ver 0.5.3</p>
             </Card.Footer>
         </Card.Body>
     </Card>
