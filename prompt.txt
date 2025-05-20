@@ -1,0 +1,5 @@
+Okay, so technically i cant find a reasonable dataset.
+let's move towards reinforced learning(?)
+i can make a webapp to collect data from the students, lets talk generic for now, generic coloumns, do not specify or give forms or anything for now.
+the webapp would collect data from forms in the form of json. This data would be like the details for the students entered by the teacher, their assignment(s) marks quizzes marks, their class activities score, their dress code score, their mids exam score, etc.
+my intention is to predict scores such as assignment, quizzes, mids and finals of the student
