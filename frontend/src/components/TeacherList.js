@@ -12,11 +12,11 @@ const TeacherList = (props) => {
             setTeachers(res.data);
         };
         fetchData();
-    }, []);
+    }, [props.API_URL]);
 
     const deleteTeacher = async (id) => {
         await axios.delete(`${props.API_URL}/teachers/${id}`);
-        setTeachers(teachers.filter((teacher) => teacher.id !== id));
+        setTeachers(teachers.filter((teacher) => teacher._id !== id));
     };
 
     const handleSubmit = async (event) => {
@@ -32,8 +32,8 @@ const TeacherList = (props) => {
             subject,
         };
 
-        await axios.post(`${props.API_URL}/teachers/`, newTeacher);
-        setTeachers([...teachers, newTeacher]);
+        const res = await axios.post(`${props.API_URL}/teachers/`, newTeacher);
+        setTeachers([...teachers, res.data]);
         form.reset();
     };
 
@@ -51,16 +51,16 @@ const TeacherList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {teachers.map((teacher) => (
-                        <tr key={teacher.id}>
-                            <td>{teacher.id}</td>
+                    {teachers.map((teacher, index) => (
+                        <tr key={teacher._id}>
+                            <td>{index + 1}</td>
                             <td>{teacher.name}</td>
                             <td>{teacher.email}</td>
                             <td className="fst-italic">{teacher.subject}</td>
                             <td>
                                 <Button
                                     variant="danger"
-                                    onClick={() => deleteTeacher(teacher.id)}
+                                    onClick={() => deleteTeacher(teacher._id)}
                                 >
                                     Delete
                                 </Button>

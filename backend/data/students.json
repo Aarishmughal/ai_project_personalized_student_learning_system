@@ -1,14 +1,12 @@
 [
   {
-    "id": 1,
-    "name": "Alice",
-    "email": "alice@example.com",
-    "password": "123456"
+    "_id": "735584c7-cc42-4575-8d60-3ba39c0d7f55",
+    "name": "Test2",
+    "email": "123@123"
   },
   {
-    "id": 2,
-    "name": "Bob",
-    "email": "bob@example.com",
-    "password": "123456"
+    "_id": "90b4d093-d631-40f6-a077-007d0e92b705",
+    "name": "Awais",
+    "email": "awais@gmail.com"
   }
 ]

@@ -1,11 +1,10 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 const router = express.Router();
 
 const filePath = path.join(__dirname, "../data/library.json");
-
-let bookIdCounter = 0;
 
 const readBooks = () => {
     const data = fs.readFileSync(filePath, "utf8");
@@ -23,8 +22,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     const books = readBooks();
-    bookIdCounter++;
-    const newBook = { id: bookIdCounter, ...req.body };
+    const newBook = { _id: uuidv4(), ...req.body };
     books.push(newBook);
     writeBooks(books);
     res.json(newBook);
@@ -32,10 +30,9 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
     let books = readBooks();
-    const idToDelete = parseInt(req.params.id);
-    books = books.filter((book) => book.id !== idToDelete);
+    const idToDelete = req.params.id;
+    books = books.filter((book) => book._id !== idToDelete);
     writeBooks(books);
-    bookIdCounter--;
     res.json({ message: "Book deleted!" });
 });
 

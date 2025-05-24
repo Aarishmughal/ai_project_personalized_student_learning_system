@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "22e1c2a9-4d51-48d9-8f17-ab6b16097973",
+    "title": "Quiz 03",
+    "date": "2025-05-24",
+    "totalMarks": "25",
+    "type": "Quiz"
+  },
+  {
+    "_id": "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b",
+    "title": "Assignment 03",
+    "date": "2025-05-24",
+    "totalMarks": "60",
+    "type": "Assignment"
+  },
+  {
+    "_id": "772a3137-ef6c-4588-806c-92fe372ce5f5",
+    "title": "Class Activity",
+    "date": "2025-05-24",
+    "totalMarks": "5",
+    "type": "Miscellaneous"
+  }
+]

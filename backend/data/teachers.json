@@ -1,14 +1,8 @@
 [
   {
-    "id": 1,
-    "name": "John Doe",
-    "subject": "Mathematics",
-    "email": "johndoe@gmail.com"
-  },
-  {
-    "id": 2,
-    "name": "Test",
-    "email": "test@test",
-    "subject": "AASD"
+    "_id": "655a9eaf-0ccb-4a31-a5d9-8b8794da1ca0",
+    "name": "Aarish",
+    "email": "aarish@gmail.com",
+    "subject": "Maths"
   }
 ]

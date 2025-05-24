@@ -1,12 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Form, Button, Card, Modal } from "react-bootstrap";
+import { Table, Form, Button, Modal } from "react-bootstrap";
 
 const Library = (props) => {
     const [books, setBooks] = useState([]);
     const [courses, setCourses] = useState([]);
-    const booksCount = books.length;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,11 +15,11 @@ const Library = (props) => {
             setCourses(courseRes.data);
         };
         fetchData();
-    }, []);
+    }, [props.API_URL]);
 
     const deleteBook = async (id) => {
         await axios.delete(`${props.API_URL}/library/${id}`);
-        setBooks(books.filter((book) => book.id !== id));
+        setBooks(books.filter((book) => book._id !== id));
     };
 
     const handleSubmit = async (event) => {
@@ -28,7 +27,7 @@ const Library = (props) => {
         const form = event.target;
         const title = form.elements.title.value;
         const author = form.elements.author.value;
-        const course_id = Number(form.elements.course_id.value);
+        const course_id = form.elements.course_id.value;
 
         const newBook = {
             title,
@@ -36,9 +35,8 @@ const Library = (props) => {
             course_id,
         };
 
-        await axios.post(`${props.API_URL}/library/`, newBook);
-        newBook.id = booksCount + 1;
-        setBooks([...books, newBook]);
+        const res = await axios.post(`${props.API_URL}/library/`, newBook);
+        setBooks([...books, res.data]);
         form.reset();
     };
 
@@ -61,31 +59,25 @@ const Library = (props) => {
                         <th>ID</th>
                         <th>Title</th>
                         <th>Author</th>
-                        <th>For Course</th>
+                        <th>Course</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {books.map((book) => (
-                        <tr key={book.id}>
-                            <td>{book.id}</td>
+                    {books.map((book, index) => (
+                        <tr key={book._id}>
+                            <td>{index + 1}</td>
                             <td>{book.title}</td>
                             <td>{book.author}</td>
-                            <td className="fst-italic">
-                                {courses.map((course) => {
-                                    if (course.id === book.course_id) {
-                                        return (
-                                            <span key={course.id}>
-                                                {course.title}
-                                            </span>
-                                        );
-                                    }
-                                })}
+                            <td>
+                                {courses.find(
+                                    (course) => course._id === book.course_id
+                                )?.title || ""}
                             </td>
                             <td>
                                 <Button
                                     variant="danger"
-                                    onClick={() => deleteBook(book.id)}
+                                    onClick={() => deleteBook(book._id)}
                                 >
                                     Delete
                                 </Button>
@@ -94,7 +86,6 @@ const Library = (props) => {
                     ))}
                 </tbody>
             </Table>
-            <hr />
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New Book</Modal.Title>
@@ -118,13 +109,13 @@ const Library = (props) => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Best Suitable for Course</Form.Label>
+                            <Form.Label>Course</Form.Label>
                             <Form.Select className="mb-3" name="course_id">
                                 <option selected disabled>
                                     -- Select an Option --
                                 </option>
                                 {courses.map((course) => (
-                                    <option key={course.id} value={course.id}>
+                                    <option key={course._id} value={course._id}>
                                         {course.title}
                                     </option>
                                 ))}

@@ -9,32 +9,32 @@ const CourseList = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get(`${props.API_URL}/courses/`);
-            const teachers = await axios.get(`${props.API_URL}/teachers/`);
-            setCourses(res.data);
-            setTeachers(teachers.data);
+            const coursesRes = await axios.get(`${props.API_URL}/courses/`);
+            setCourses(coursesRes.data);
+            const teachersRes = await axios.get(`${props.API_URL}/teachers/`);
+            setTeachers(teachersRes.data);
         };
         fetchData();
-    }, []);
+    }, [props.API_URL]);
 
     const deleteCourse = async (id) => {
         await axios.delete(`${props.API_URL}/courses/${id}`);
-        setCourses(courses.filter((course) => course.id !== id));
+        setCourses(courses.filter((course) => course._id !== id));
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
         const title = form.elements.title.value;
-        const teacher_id = Number(form.elements.teacher_id.value);
+        const teacher_id = form.elements.teacher_id.value;
 
         const newCourse = {
             title,
             teacher_id,
         };
 
-        await axios.post(`${props.API_URL}/courses/`, newCourse);
-        setCourses([...courses, newCourse]);
+        const res = await axios.post(`${props.API_URL}/courses/`, newCourse);
+        setCourses([...courses, res.data]);
         form.reset();
     };
 
@@ -51,25 +51,20 @@ const CourseList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {courses.map((course) => (
-                        <tr key={course.id}>
-                            <td>{course.id}</td>
+                    {courses.map((course, index) => (
+                        <tr key={course._id}>
+                            <td>{index + 1}</td>
                             <td>{course.title}</td>
                             <td>
-                                {teachers.map((teacher) => {
-                                    if (teacher.id === course.teacher_id) {
-                                        return (
-                                            <span key={teacher.id}>
-                                                {teacher.name}
-                                            </span>
-                                        );
-                                    }
-                                })}
+                                {teachers.find(
+                                    (teacher) =>
+                                        teacher._id === course.teacher_id
+                                )?.name || ""}
                             </td>
                             <td>
                                 <Button
                                     variant="danger"
-                                    onClick={() => deleteCourse(course.id)}
+                                    onClick={() => deleteCourse(course._id)}
                                 >
                                     Delete
                                 </Button>
@@ -97,7 +92,7 @@ const CourseList = (props) => {
                                 -- Select an Option --
                             </option>
                             {teachers.map((teacher) => (
-                                <option key={teacher.id} value={teacher.id}>
+                                <option key={teacher._id} value={teacher._id}>
                                     {teacher.name}
                                 </option>
                             ))}

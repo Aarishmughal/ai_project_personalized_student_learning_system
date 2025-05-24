@@ -9,6 +9,8 @@ import TeacherList from "./components/TeacherList";
 import "./App.css";
 import Library from "./components/Library";
 import AiCorner from "./components/AiCorner";
+import Assessments from "./components/Assessments";
+import GradeAssessment from "./components/GradeAssessment";
 
 const App = () => {
     const API_URL = "http://localhost:5000/api";
@@ -34,7 +36,7 @@ const App = () => {
                                 to="/students"
                                 className="nav-link-custom mx-2"
                             >
-                                <i class="bi bi-people-fill me-2"></i>
+                                <i className="bi bi-people-fill me-2"></i>
                                 Students
                             </Nav.Link>
                             <Nav.Link
@@ -42,7 +44,7 @@ const App = () => {
                                 to="/courses"
                                 className="nav-link-custom mx-2"
                             >
-                                <i class="bi bi-book me-2"></i>
+                                <i className="bi bi-book me-2"></i>
                                 Courses
                             </Nav.Link>
                             <Nav.Link
@@ -50,7 +52,7 @@ const App = () => {
                                 to="/teachers"
                                 className="nav-link-custom mx-2"
                             >
-                                <i class="bi bi-people me-2"></i>
+                                <i className="bi bi-people me-2"></i>
                                 Teachers
                             </Nav.Link>
                             <Nav.Link
@@ -58,7 +60,7 @@ const App = () => {
                                 to="/library"
                                 className="nav-link-custom mx-2"
                             >
-                                <i class="bi bi-book me-2"></i>
+                                <i className="bi bi-book me-2"></i>
                                 Library
                             </Nav.Link>
                             <Nav.Link
@@ -66,8 +68,24 @@ const App = () => {
                                 to="/ai-corner"
                                 className="nav-link-custom mx-2"
                             >
-                                <i class="bi bi-stars me-2"></i>
+                                <i className="bi bi-stars me-2"></i>
                                 AI Corner
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                to="/assessments"
+                                className="nav-link-custom mx-2"
+                            >
+                                <i className="bi bi-clipboard-data-fill me-2"></i>
+                                Assessments
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                to="/grade-assessment"
+                                className="nav-link-custom mx-2"
+                            >
+                                <i className="bi bi-clipboard-check me-2"></i>
+                                Grade Assesments
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
@@ -96,6 +114,14 @@ const App = () => {
                     <Route
                         path="/ai-corner"
                         element={<AiCorner API_URL={API_URL} />}
+                    />
+                    <Route
+                        path="/assessments"
+                        element={<Assessments API_URL={API_URL} />}
+                    />
+                    <Route
+                        path="/grade-assessment"
+                        element={<GradeAssessment API_URL={API_URL} />}
                     />
                 </Routes>
             </Container>

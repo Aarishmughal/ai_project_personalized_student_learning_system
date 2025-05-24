@@ -2,10 +2,9 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const router = express.Router();
+const { v4: uuidv4 } = require("uuid");
 
 const filePath = path.join(__dirname, "../data/students.json");
-
-let studentIdCounter = 3;
 
 const readStudents = () => {
     const data = fs.readFileSync(filePath, "utf8");
@@ -23,8 +22,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     const students = readStudents();
-    studentIdCounter++;
-    const newStudent = { id: studentIdCounter, ...req.body };
+    const newStudent = { _id: uuidv4(), ...req.body };
     students.push(newStudent);
     writeStudents(students);
     res.json(newStudent);
@@ -32,10 +30,9 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
     let students = readStudents();
-    const idToDelete = parseInt(req.params.id);
-    students = students.filter((student) => student.id !== idToDelete);
+    const idToDelete = req.params.id;
+    students = students.filter((student) => student._id !== idToDelete);
     writeStudents(students);
-    studentIdCounter--;
     res.json({ message: "Student deleted" });
 });
 

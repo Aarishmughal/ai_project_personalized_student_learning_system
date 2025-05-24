@@ -2,10 +2,8 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const router = express.Router();
-
+const { v4: uuidv4 } = require("uuid");
 const filePath = path.join(__dirname, "../data/courses.json");
-
-let courseIdCounter = 103;
 
 const readCrouses = () => {
     const data = fs.readFileSync(filePath, "utf8");
@@ -23,8 +21,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     const courses = readCrouses();
-    courseIdCounter++;
-    const newCourse = { id: courseIdCounter, ...req.body };
+    const newCourse = { _id: uuidv4(), ...req.body };
     courses.push(newCourse);
     writeCourses(courses);
     res.json(newCourse);
@@ -32,10 +29,9 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
     let courses = readCrouses();
-    const idToDelete = parseInt(req.params.id);
-    courses = courses.filter((course) => course.id !== idToDelete);
+    const idToDelete = req.params.id;
+    courses = courses.filter((course) => course._id !== idToDelete);
     writeCourses(courses);
-    courseIdCounter--;
     res.json({ message: "Course deleted" });
 });
 

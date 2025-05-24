@@ -1,32 +1,7 @@
 [
   {
-    "id": 101,
-    "title": "Mathematics",
-    "teacher_id": 1
-  },
-  {
-    "id": 102,
-    "title": "Computer Science",
-    "teacher_id": 1
-  },
-  {
-    "id": 103,
-    "title": "Test",
-    "teacher_id": 1
-  },
-  {
-    "id": 107,
-    "title": "Test 4",
-    "teacher_id": 1
-  },
-  {
-    "id": 104,
-    "title": "Tst",
-    "teacher_id": 2
-  },
-  {
-    "id": 104,
-    "title": "Urdu",
-    "teacher_id": 1
+    "_id": "36034abe-9ed7-4dea-8771-5d65fbfa05c2",
+    "title": "Linear Algebra",
+    "teacher_id": "655a9eaf-0ccb-4a31-a5d9-8b8794da1ca0"
   }
 ]
