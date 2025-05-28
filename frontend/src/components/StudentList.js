@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Form, Button, Modal } from "react-bootstrap";
+import DataTable from "react-data-table-component";
 
 // --- Utility/API functions ---
 const fetchStudents = async (API_URL) => {
@@ -42,15 +43,85 @@ const StudentList = (props) => {
     const [addShow, setAddShow] = useState(false);
     const [detailShow, setDetailShow] = useState(false);
     const [scoreModalShow, setScoreModalShow] = useState(false);
+    const [bulkModalShow, setBulkModalShow] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState(null);
     const [scoreInputs, setScoreInputs] = useState({});
     const [studentGrades, setStudentGrades] = useState({});
     const [gradesLoading, setGradesLoading] = useState(false);
+    const [bulkJson, setBulkJson] = useState("");
+    const [filterText, setFilterText] = useState("");
 
     useEffect(() => {
         fetchStudents(props.API_URL).then(setStudents);
         fetchAssessments(props.API_URL).then(setAssessments);
     }, [props.API_URL]);
+
+    const filteredStudents = students.filter(
+        (s) =>
+            s.name.toLowerCase().includes(filterText.toLowerCase()) ||
+            s.email.toLowerCase().includes(filterText.toLowerCase())
+    );
+    const columns = [
+        {
+            name: "ID",
+            selector: (row, index) => index + 1,
+            width: "60px",
+            sortable: true,
+        },
+        {
+            name: "Name",
+            selector: (row) => row.name,
+            sortable: true,
+            width: "200px",
+            cell: (row) => (
+                <span
+                    style={{
+                        cursor: "pointer",
+                        color: "#007bff",
+                        textDecoration: "underline",
+                    }}
+                    onClick={() => handleDetailShow(row)}
+                >
+                    {row.name}
+                </span>
+            ),
+        },
+        {
+            name: "Email",
+            selector: (row) => row.email,
+            sortable: true,
+            width: "600px",
+        },
+        {
+            name: "Actions",
+            cell: (row) => (
+                <div className="d-flex align-items-start gap-2 m-2">
+                    <Button
+                        variant="danger"
+                        onClick={() => handleDeleteStudent(row._id)}
+                    >
+                        <i className="bi bi-x-circle-fill"></i>
+                    </Button>
+                    <Button
+                        variant="primary"
+                        onClick={() => handleDetailShow(row)}
+                    >
+                        <i className="bi bi-pen-fill"></i>
+                    </Button>
+                    <Button
+                        variant="success"
+                        onClick={() => handleScoreModalShow(row)}
+                        title="Add Assessment Score"
+                    >
+                        <i className="bi bi-clipboard-plus"></i>
+                    </Button>
+                </div>
+            ),
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+        },
+    ];
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -157,6 +228,38 @@ const StudentList = (props) => {
         }
     };
 
+    const handleBulkModalClose = () => {
+        setBulkModalShow(false);
+        setBulkJson("");
+    };
+    const handleBulkModalShow = () => setBulkModalShow(true);
+
+    const handleBulkJsonChange = (e) => setBulkJson(e.target.value);
+
+    const handleBulkJsonSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const data = JSON.parse(bulkJson);
+            if (!Array.isArray(data)) {
+                alert("Bulk data must be a JSON array of students.");
+                return;
+            }
+            // Optionally, validate each object
+            const added = [];
+            for (const student of data) {
+                if (student.name && student.email) {
+                    const res = await addStudent(props.API_URL, student);
+                    added.push(res);
+                }
+            }
+            setStudents((prev) => [...prev, ...added]);
+            alert(`${added.length} students added successfully!`);
+            handleBulkModalClose();
+        } catch (err) {
+            alert("Invalid JSON or failed to add students.");
+        }
+    };
+
     return (
         <>
             <section className="mb-4">
@@ -169,56 +272,32 @@ const StudentList = (props) => {
                     >
                         Add New Student
                     </Button>
+                    <Button
+                        variant="success"
+                        onClick={handleBulkModalShow}
+                        className="m-0"
+                    >
+                        Bulk Add Students
+                    </Button>
+                    <Form.Control
+                        type="text"
+                        placeholder="Search by name or email"
+                        value={filterText}
+                        onChange={(e) => setFilterText(e.target.value)}
+                        style={{ maxWidth: 250 }}
+                    />
                 </div>
                 <hr />
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {students.map((student, index) => (
-                            <tr key={student._id}>
-                                <td>{index + 1}</td>
-                                <td>{student.name}</td>
-                                <td>{student.email}</td>
-                                <td>
-                                    <div className="d-flex align-items-start gap-2">
-                                        <Button
-                                            variant="danger"
-                                            onClick={() =>
-                                                handleDeleteStudent(student._id)
-                                            }
-                                        >
-                                            <i className="bi bi-x-circle-fill"></i>
-                                        </Button>
-                                        <Button
-                                            variant="primary"
-                                            onClick={() =>
-                                                handleDetailShow(student)
-                                            }
-                                        >
-                                            <i className="bi bi-pen-fill"></i>
-                                        </Button>
-                                        <Button
-                                            variant="success"
-                                            onClick={() =>
-                                                handleScoreModalShow(student)
-                                            }
-                                            title="Add Assessment Score"
-                                        >
-                                            <i className="bi bi-clipboard-plus"></i>
-                                        </Button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                <DataTable
+                    columns={columns}
+                    data={filteredStudents}
+                    pagination
+                    highlightOnHover
+                    pointerOnHover
+                    responsive
+                    striped
+                    dense
+                />
                 <Modal show={addShow} onHide={handleAddClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add New Student</Modal.Title>
@@ -351,6 +430,30 @@ const StudentList = (props) => {
                             ))}
                             <Button variant="success" type="submit">
                                 Submit Score
+                            </Button>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
+                <Modal show={bulkModalShow} onHide={handleBulkModalClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Bulk Add Students (Paste JSON Array)
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form onSubmit={handleBulkJsonSubmit}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Paste JSON Array</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={8}
+                                    value={bulkJson}
+                                    onChange={handleBulkJsonChange}
+                                    placeholder='[{"name": "John Doe", "email": "john@example.com"}, ...]'
+                                />
+                            </Form.Group>
+                            <Button variant="success" type="submit">
+                                Upload
                             </Button>
                         </Form>
                     </Modal.Body>

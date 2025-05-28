@@ -38,4 +38,24 @@ router.delete("/:id", (req, res) => {
     res.json({ message: "Assessment deleted!" });
 });
 
+router.put("/:id", (req, res) => {
+    const assessments = readAssessments();
+    const idToUpdate = req.params.id;
+    const updatedData = req.body;
+    let updatedAssessment = null;
+    const updatedAssessments = assessments.map((assessment) => {
+        if (assessment._id === idToUpdate) {
+            updatedAssessment = { ...assessment, ...updatedData };
+            return updatedAssessment;
+        }
+        return assessment;
+    });
+    writeAssessments(updatedAssessments);
+    if (updatedAssessment) {
+        res.json(updatedAssessment);
+    } else {
+        res.status(404).json({ error: "Assessment not found" });
+    }
+});
+
 module.exports = router;

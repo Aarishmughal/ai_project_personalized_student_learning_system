@@ -41,30 +41,6 @@ const App = () => {
                             </Nav.Link>
                             <Nav.Link
                                 as={Link}
-                                to="/courses"
-                                className="nav-link-custom mx-2"
-                            >
-                                <i className="bi bi-book me-2"></i>
-                                Courses
-                            </Nav.Link>
-                            <Nav.Link
-                                as={Link}
-                                to="/teachers"
-                                className="nav-link-custom mx-2"
-                            >
-                                <i className="bi bi-people me-2"></i>
-                                Teachers
-                            </Nav.Link>
-                            <Nav.Link
-                                as={Link}
-                                to="/library"
-                                className="nav-link-custom mx-2"
-                            >
-                                <i className="bi bi-book me-2"></i>
-                                Library
-                            </Nav.Link>
-                            <Nav.Link
-                                as={Link}
                                 to="/ai-corner"
                                 className="nav-link-custom mx-2"
                             >
@@ -78,14 +54,6 @@ const App = () => {
                             >
                                 <i className="bi bi-clipboard-data-fill me-2"></i>
                                 Assessments
-                            </Nav.Link>
-                            <Nav.Link
-                                as={Link}
-                                to="/grade-assessment"
-                                className="nav-link-custom mx-2"
-                            >
-                                <i className="bi bi-clipboard-check me-2"></i>
-                                Grade Assesments
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
@@ -118,10 +86,6 @@ const App = () => {
                     <Route
                         path="/assessments"
                         element={<Assessments API_URL={API_URL} />}
-                    />
-                    <Route
-                        path="/grade-assessment"
-                        element={<GradeAssessment API_URL={API_URL} />}
                     />
                 </Routes>
             </Container>

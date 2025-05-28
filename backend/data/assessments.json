@@ -4,20 +4,31 @@
     "title": "Quiz 03",
     "date": "2025-05-24",
     "totalMarks": "25",
-    "type": "Quiz"
+    "type": "Quiz",
+    "weightage": "10"
   },
   {
     "_id": "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b",
     "title": "Assignment 03",
     "date": "2025-05-24",
     "totalMarks": "60",
-    "type": "Assignment"
+    "type": "Assignment",
+    "weightage": "20"
   },
   {
     "_id": "772a3137-ef6c-4588-806c-92fe372ce5f5",
     "title": "Class Activity",
     "date": "2025-05-24",
     "totalMarks": "5",
-    "type": "Miscellaneous"
+    "type": "Miscellaneous",
+    "weightage": "5"
+  },
+  {
+    "_id": "0631478e-879c-42b3-9f5c-0f2321a48b92",
+    "title": "Quiz 04",
+    "date": "2025-05-29",
+    "totalMarks": "25",
+    "type": "Quiz",
+    "weightage": "10"
   }
 ]
