@@ -35,7 +35,6 @@ const submitScores = async (API_URL, studentId, scores) => {
         scores,
     });
 };
-// --- End Utility/API functions ---
 
 const StudentList = (props) => {
     const [students, setStudents] = useState([]);
@@ -297,6 +296,19 @@ const StudentList = (props) => {
                     responsive
                     striped
                     dense
+                    customStyles={{
+                        rows: {
+                            style: {
+                                fontSize: "1.15rem",
+                            },
+                        },
+                        headCells: {
+                            style: {
+                                fontSize: "1.2rem",
+                                fontWeight: "bold",
+                            },
+                        },
+                    }}
                 />
                 <Modal show={addShow} onHide={handleAddClose}>
                     <Modal.Header closeButton>

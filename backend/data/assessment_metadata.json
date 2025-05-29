@@ -1,0 +1,34 @@
+{
+  "assessment_weights": {
+    "Quiz_22e1c": 10,
+    "Assignment_69e6a": 20,
+    "Miscellaneous_772a3": 5,
+    "Quiz_06314": 10
+  },
+  "assessment_info": {
+    "Quiz_22e1c": {
+      "title": "Quiz 03",
+      "type": "Quiz",
+      "total_marks": 25,
+      "weightage": 10
+    },
+    "Assignment_69e6a": {
+      "title": "Assignment 03",
+      "type": "Assignment",
+      "total_marks": 60,
+      "weightage": 20
+    },
+    "Miscellaneous_772a3": {
+      "title": "Class Activity",
+      "type": "Miscellaneous",
+      "total_marks": 5,
+      "weightage": 5
+    },
+    "Quiz_06314": {
+      "title": "Quiz 04",
+      "type": "Quiz",
+      "total_marks": 25,
+      "weightage": 10
+    }
+  }
+}

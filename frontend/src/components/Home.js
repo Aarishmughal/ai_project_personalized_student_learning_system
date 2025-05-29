@@ -24,7 +24,7 @@ const Home = () => (
                     </Nav.Link>
                 </div>
                 <div className="col d-flex">
-                    <Nav.Link as={Link} to="/library" className="flex-fill">
+                    <Nav.Link as={Link} to="/ai-corner" className="flex-fill">
                         <Card className="bg-warning p-4 home-card-custom h-100">
                             <i
                                 class="bi bi-stars m-0"
