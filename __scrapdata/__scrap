@@ -1,0 +1,31 @@
+api = StudentScorePredictorAPI()
+    
+    print("Training initial model...")
+    DATA_DIR = os.path.dirname(os.path.abspath(__file__))
+    result = api.train_initial_model(data_path("training_data.csv"))
+    print(result)
+    
+    # Example: Make prediction
+    print("\nMaking prediction...")
+    student_grades = {
+        "Quiz_22e1c": 0.08,
+        "Assignment_69e6a": 0.15,
+        "Miscellaneous_772a3": 0.04,
+        "Quiz_06314": 0.0
+    }
+    
+    prediction = api.predict_student_score("test_student_123", student_grades)
+    print(f"Prediction: {prediction}")
+    
+    # Example: Submit teacher feedback
+    print("\nSubmitting teacher feedback...")
+    feedback_result = api.submit_feedback(
+        student_id="test_student_123",
+        previous_grades=student_grades,
+        predicted_score=prediction.get("predicted_score", 0),
+        actual_score=0.12,  # Actual score from teacher
+        teacher_feedback="good prediction, very close to actual performance"
+    )
+    print(f"Feedback result: {feedback_result}")
+    
+    print("\nAPI ready for web application integration!")

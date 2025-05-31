@@ -30,5 +30,13 @@
     "totalMarks": "25",
     "type": "Quiz",
     "weightage": "10"
+  },
+  {
+    "_id": "9e13aa65-04fc-49a3-8ab6-bf0efbcf3a6e",
+    "title": "Mids Exam",
+    "date": "2025-06-01",
+    "totalMarks": "100",
+    "type": "Exam",
+    "weightage": "45"
   }
 ]

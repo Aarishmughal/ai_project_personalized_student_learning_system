@@ -10,6 +10,7 @@ import json
 from typing import Dict, List, Tuple, Optional
 import logging
 import os
+import sys
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -240,7 +241,7 @@ class StudentScorePredictorAPI:
         if model_path:
             self.load_model(model_path)
     
-    def train_initial_model(self, data_path: str, model_save_path: str = "models/student_predictor.pkl"):
+    def train_initial_model(self, data_path: str, model_save_path: str = "data/student_predictor.pkl"):
         """Train initial model and save it"""
         # Determine input size from data
         df = pd.read_csv(data_path)
@@ -335,35 +336,31 @@ def data_path(filename):
     return os.path.join(DATA_DIR, filename)
 
 if __name__ == "__main__":
-    api = StudentScorePredictorAPI()
-    
-    # Example: Train initial model (you would call this once with your data)
-    print("Training initial model...")
+    import argparse, json
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--action", required=True, choices=["predict", "train", "feedback"])
+    parser.add_argument("--input", type=str, help="JSON input for prediction or feedback")
+    args = parser.parse_args()
+
     DATA_DIR = os.path.dirname(os.path.abspath(__file__))
-    result = api.train_initial_model(data_path("training_data.csv"))
-    print(result)
-    
-    # Example: Make prediction
-    print("\nMaking prediction...")
-    student_grades = {
-        "Quiz_22e1c": 0.08,
-        "Assignment_69e6a": 0.15,
-        "Miscellaneous_772a3": 0.04,
-        "Quiz_06314": 0.0
-    }
-    
-    prediction = api.predict_student_score("test_student_123", student_grades)
-    print(f"Prediction: {prediction}")
-    
-    # Example: Submit teacher feedback
-    print("\nSubmitting teacher feedback...")
-    feedback_result = api.submit_feedback(
-        student_id="test_student_123",
-        previous_grades=student_grades,
-        predicted_score=prediction.get("predicted_score", 0),
-        actual_score=0.12,  # Actual score from teacher
-        teacher_feedback="good prediction, very close to actual performance"
-    )
-    print(f"Feedback result: {feedback_result}")
-    
-    print("\nAPI ready for web application integration!")
+    api = StudentScorePredictorAPI(os.path.join(DATA_DIR, "student_predictor.pkl"))
+    if args.action == "predict":
+        data = json.loads(args.input)
+        result = api.predict_student_score(data["student_id"], data["previous_grades"])
+        print(json.dumps(result))
+        sys.stdout.flush()
+        sys.exit(0)
+    elif args.action == "train":
+        pass
+    elif args.action == "feedback":
+        data = json.loads(args.input)
+        result = api.submit_feedback(
+            data["student_id"],
+            data["previous_grades"],
+            data["predicted_score"],
+            data["actual_score"],
+            data["teacher_feedback"]
+        )
+        print(json.dumps(result))
+        sys.stdout.flush()
+        sys.exit(0)

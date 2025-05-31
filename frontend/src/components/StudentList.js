@@ -173,7 +173,17 @@ const StudentList = (props) => {
         setDetailShow(true);
         try {
             const grades = await fetchStudentGrades(props.API_URL, student._id);
-            setStudentGrades(grades);
+            // Map grades to model column names for display
+            const mappedGrades = {};
+            for (const assessment of assessments) {
+                const colName = `${assessment.type}_${assessment._id.slice(
+                    0,
+                    5
+                )}`;
+                mappedGrades[colName] =
+                    grades[colName] !== undefined ? grades[colName] : null;
+            }
+            setStudentGrades(mappedGrades);
         } catch (err) {
             setStudentGrades({});
         } finally {
@@ -204,6 +214,7 @@ const StudentList = (props) => {
 
     const handleScoreSubmit = async (event) => {
         event.preventDefault();
+        const mappedScores = {};
         for (const assessment of assessments) {
             const val = scoreInputs[assessment._id];
             if (val === undefined || val === "") {
@@ -216,9 +227,16 @@ const StudentList = (props) => {
                 );
                 return;
             }
+            const colName = `${assessment.type}_${assessment._id.slice(0, 5)}`;
+            mappedScores[colName] = Number(val);
         }
         try {
-            await submitScores(props.API_URL, selectedStudent._id, scoreInputs);
+            console.log("Submitting scores:", mappedScores);
+            await submitScores(
+                props.API_URL,
+                selectedStudent._id,
+                mappedScores
+            );
             handleScoreModalClose();
             setScoreInputs({});
             alert("Scores submitted successfully!");
@@ -386,10 +404,28 @@ const StudentList = (props) => {
                                             <td>{assessment.title}</td>
                                             <td>
                                                 {studentGrades[
-                                                    assessment._id
-                                                ] !== undefined ? (
+                                                    `${
+                                                        assessment.type
+                                                    }_${assessment._id.slice(
+                                                        0,
+                                                        5
+                                                    )}`
+                                                ] !== undefined &&
+                                                studentGrades[
+                                                    `${
+                                                        assessment.type
+                                                    }_${assessment._id.slice(
+                                                        0,
+                                                        5
+                                                    )}`
+                                                ] !== null ? (
                                                     studentGrades[
-                                                        assessment._id
+                                                        `${
+                                                            assessment.type
+                                                        }_${assessment._id.slice(
+                                                            0,
+                                                            5
+                                                        )}`
                                                     ]
                                                 ) : (
                                                     <span className="text-muted">

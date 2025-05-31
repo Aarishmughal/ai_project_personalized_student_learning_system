@@ -1,62 +1,65 @@
 {
   "735584c7-cc42-4575-8d60-3ba39c0d7f55": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 10,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 10,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 3
+    "Quiz_22e1c": 0.04000000000000001,
+    "Assignment_69e6a": 0.1,
+    "Miscellaneous_772a3": 0.04000000000000001,
+    "Quiz_06314": 0.068
   },
   "90b4d093-d631-40f6-a077-007d0e92b705": {
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 5,
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 25,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 25
+    "Miscellaneous_772a3": 5,
+    "Quiz_22e1c": 22,
+    "Assignment_69e6a": 55,
+    "Quiz_06314": 22
   },
   "a3544a18-77c5-4915-b0a8-91dd15a2a389": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 13,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 22,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 4
+    "Quiz_22e1c": 13,
+    "Assignment_69e6a": 22,
+    "Miscellaneous_772a3": 4
   },
   "8b8567db-f0f9-4406-bee7-98b4ce2918a2": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 12,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 12,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 3
+    "Quiz_22e1c": 12,
+    "Assignment_69e6a": 12,
+    "Miscellaneous_772a3": 3
   },
   "ddea8845-1b36-436d-b4d7-4a03b8c2b45a": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 18,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 55,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 5
+    "Quiz_22e1c": 18,
+    "Assignment_69e6a": 55,
+    "Miscellaneous_772a3": 5
   },
   "062660fb-a51f-4ecf-86cf-30e653ea29f3": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 23,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 55,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 4
+    "Quiz_22e1c": 23,
+    "Assignment_69e6a": 55,
+    "Miscellaneous_772a3": 4
   },
   "23950561-d4d9-48d0-bf8a-9e784b8062e4": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 14,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 23,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 2
+    "Quiz_22e1c": 14,
+    "Assignment_69e6a": 23,
+    "Miscellaneous_772a3": 2
   },
   "1b44f983-75b1-4b72-b350-68fca15d9749": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 23,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 55,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 3
+    "Quiz_22e1c": 23,
+    "Assignment_69e6a": 55,
+    "Miscellaneous_772a3": 3
   },
   "2507ef8a-a3c6-4401-8e29-d45b51284648": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 23,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 45,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 3
+    "Quiz_22e1c": 23,
+    "Assignment_69e6a": 45,
+    "Miscellaneous_772a3": 3
   },
   "0cd39740-b18c-4daf-aaed-dc00709da259": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 14,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 13,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 2
+    "Quiz_22e1c": 14,
+    "Assignment_69e6a": 13,
+    "Miscellaneous_772a3": 2
   },
   "71a0a3c6-f4ee-448e-8025-b17169e2a9cf": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 23,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 59,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 5
+    "Quiz_22e1c": 23,
+    "Assignment_69e6a": 59,
+    "Miscellaneous_772a3": 5
   },
-  "26a4ffa8-728c-4175-b36b-66129a9d15eb": {
-    "22e1c2a9-4d51-48d9-8f17-ab6b16097973": 25,
-    "69e6a3d0-d4aa-4d45-b97c-9c2cf9c5b23b": 60,
-    "772a3137-ef6c-4588-806c-92fe372ce5f5": 5
+  "22817cd1-bce6-40cb-a8db-5cc2757f3ef5": {
+    "Quiz_22e1c": 22,
+    "Assignment_69e6a": 55,
+    "Miscellaneous_772a3": 3,
+    "Quiz_06314": 18
   }
 }
