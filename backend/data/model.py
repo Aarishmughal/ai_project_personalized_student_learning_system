@@ -11,19 +11,14 @@ from typing import Dict, List, Tuple, Optional
 import logging
 import os
 
-# Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class StudentScorePredictor(nn.Module):
-    """Neural network for predicting student scores with reinforcement learning capabilities"""
-    
     def __init__(self, input_size: int, hidden_sizes: List[int] = [64, 32, 16]):
         super(StudentScorePredictor, self).__init__()
-        
         layers = []
         prev_size = input_size
-        
         for hidden_size in hidden_sizes:
             layers.extend([
                 nn.Linear(prev_size, hidden_size),
@@ -31,18 +26,12 @@ class StudentScorePredictor(nn.Module):
                 nn.Dropout(0.2)
             ])
             prev_size = hidden_size
-        
-        # Output layer for score prediction
         layers.append(nn.Linear(prev_size, 1))
-        
         self.network = nn.Sequential(*layers)
-    
     def forward(self, x):
         return self.network(x)
 
-class ReinforcementLearningTrainer:
-    """Handles reinforcement learning training with teacher feedback"""
-    
+class ReinforcementLearningTrainer:    
     def __init__(self, model: StudentScorePredictor, learning_rate: float = 0.001):
         self.model = model
         self.optimizer = optim.Adam(model.parameters(), lr=learning_rate)
@@ -50,24 +39,14 @@ class ReinforcementLearningTrainer:
         self.feature_columns = []
         self.feedback_buffer = []
         self.training_history = []
-        
     def prepare_data(self, data_path: str) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Load and prepare training data from CSV"""
         try:
-            # Read CSV data
             df = pd.read_csv(data_path)
-            
-            # Store feature columns (excluding student_id)
             self.feature_columns = [col for col in df.columns if col != 'student_id']
-            
-            # Prepare features (previous grades)
             X = df[self.feature_columns].values
-            
-            # For initial training, we'll use the last column as target
-            # In real scenario, you'd have separate target scores
+
             y = df[self.feature_columns[-1]].values
             
-            # Scale features
             X_scaled = self.scaler.fit_transform(X)
             
             return torch.FloatTensor(X_scaled), torch.FloatTensor(y).unsqueeze(1)
@@ -77,12 +56,9 @@ class ReinforcementLearningTrainer:
             raise
     
     def initial_training(self, data_path: str, epochs: int = 100, validation_split: float = 0.2):
-        """Initial training on historical data"""
         logger.info("Starting initial training...")
         
         X, y = self.prepare_data(data_path)
-        
-        # Split data
         X_train, X_val, y_train, y_val = train_test_split(
             X, y, test_size=validation_split, random_state=42
         )
@@ -357,9 +333,8 @@ class StudentScorePredictorAPI:
             return {"error": str(e)}
 def data_path(filename):
     return os.path.join(DATA_DIR, filename)
-# Example usage and testing
+
 if __name__ == "__main__":
-    # Initialize API
     api = StudentScorePredictorAPI()
     
     # Example: Train initial model (you would call this once with your data)
